@@ -55,3 +55,10 @@ jobs:
         git diff --cached --exit-code || git commit -m "Auto Update by Github Actions"
         git pull --rebase origin main || true
         git push origin main
+
+    - name: Save updated cookies
+      if: steps.cache-cookies.outputs.cache-hit != 'true'
+      uses: actions/cache@v3
+      with:
+        path: cookies.pkl
+        key: cookie-cache-v1
